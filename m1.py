@@ -13,14 +13,9 @@ def find_opti(direction):
     
     return point.value
 
-
-# Case 1 : lozenge
-direction = np.array([1.0, 0.0])  # ->
+direction = np.array([1.0, 0.0])  
 point_opt = find_opti(direction)
 
-# ----------------------------------
-# Visualisation
-# ----------------------------------
 fig, ax = plt.subplots(figsize=(8, 8))
 
 
@@ -32,7 +27,6 @@ ax.fill(x, y, alpha=0.3, label="lozenge |x| + |y| ≤ 1")
 ax.scatter(*point_opt, c='red', s=100, 
            label=f'Optimal Point ({point_opt[0]:.2f}, {point_opt[1]:.2f})')
 
-# vector
 ax.quiver(0, 0, direction[0], direction[1], 
           angles='xy', scale_units='xy', scale=1,
           color='green', width=0.01, label='Direction')
