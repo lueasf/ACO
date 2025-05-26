@@ -9,8 +9,8 @@ ECOS (Embedded Conic Solver) is an open-source solver, designed for SOCP (Second
 
 
 ### Phase 3
-A & B : SLSQP
-C & D : Log-barrier method with warm start
+A & B : SLSQP \\
+C & D : Log-barrier method with warm start \\
 F & G : Realist version
 finance :
 

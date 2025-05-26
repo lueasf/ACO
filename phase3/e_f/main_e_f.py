@@ -15,14 +15,11 @@ phi_vals = 0.5 * angles
  
 def ellipse_matrix(a, b, phi):
     cp, sp = math.cos(phi), math.sin(phi)
-    R = np.array([[cp, -sp],
-                  [sp,  cp]]) 
-    D = np.array([[1.0/(a**2), 0],
-                  [0, 1.0/(b**2)]])
+    R = np.array([[cp, -sp], [sp,  cp]])
+    D = np.array([[1.0/(a**2), 0], [0, 1.0/(b**2)]])
     return R.dot(D).dot(R.T)
  
 def compute_optimum_static(c, a, b, phi):
-
     A = ellipse_matrix(a, b, phi) 
     val = c.T.dot(A).dot(c) - 1  # = g(0) = (0-c)^T A (0-c) - 1
     if val <= 0: 
@@ -95,7 +92,7 @@ for t in range(T):
     phi_t = phi_vals[t]
     x_opt[t] = compute_optimum_static(c_t, a_t, b_t, phi_t)
     if t == 0 or x_prev is None:
-        x0 = c_t.copy()  # démarrer à l'intérieur depuis le centre de l'ellipse initiale
+        x0 = c_t.copy() 
     else:
         x0 = x_prev.copy()
         g_new = (x0 - c_t).T.dot(ellipse_matrix(a_t, b_t, phi_t)).dot(x0 - c_t) - 1.0
@@ -103,8 +100,8 @@ for t in range(T):
             x0 = c_t.copy()
     x_sol = log_barrier_newton(c_t, a_t, b_t, phi_t, x0, k=100.0, tol=1e-6, max_iters=50)
     x_barrier[t] = x_sol
-    x_prev = x_sol  # met à jour pour l'itération suivante
- 
+    x_prev = x_sol 
+    
 plt.figure(figsize=(6,6))
 plt.plot(c_path[:,0], c_path[:,1], '-o', color='red', label='Centre des contraintes')
 plt.plot(x_opt[:,0], x_opt[:,1], '-s', color='green', label='Optimum statique')
